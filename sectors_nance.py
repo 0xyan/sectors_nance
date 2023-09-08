@@ -4,19 +4,22 @@ import requests
 import schedule
 import time
 import os
+from dotenv import load_dotenv
 import matplotlib.dates as mdates
 from binance.client import Client
 
+load_dotenv()
+
 def main_function(timeframe, startTime=None, periods=None):
     
-    binance_api_key = ''
-    binance_secret = ''
+    binance_api_key = os.getenv("BINANCE_API_KEY")
+    binance_secret = os.getenv("BINANCE_SECRET")
     
     client = Client(binance_api_key, binance_secret)
     
     #telegram API
-    token = ''
-    id_tg = ''
+    token = os.getenv("TELEGRAM_TOKEN")
+    id_tg = os.getenv("TELEGRAM_ID")
 
     def send(text):
         url = 'https://api.telegram.org/bot'+token+'/sendMessage?chat_id='+id_tg+'&text='+text+''
@@ -35,7 +38,7 @@ def main_function(timeframe, startTime=None, periods=None):
     #sectors
     high_FDV = ['APTUSDT', 'FILUSDT',  'SUIUSDT', 'WLDUSDT', 'SEIUSDT']
     chinese = ['NEOUSDT', 'TRXUSDT', 'CFXUSDT', 'ACHUSDT', 'PHBUSDT', 'QTUMUSDT', 'HIGHUSDT', 'ONTUSDT']
-    perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'GNSUSDT']
+    perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'GNSUSDT', 'PERPUSDT']
     L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT']
     privacy = ['XMRUSDT', 'ZECUSDT', 'DASHUSDT']
     storage = ['FILUSDT', 'ARUSDT', 'STORJUSDT']
@@ -216,3 +219,5 @@ def main_function(timeframe, startTime=None, periods=None):
         sector_df = order(final_dict[i])
         charts(i, sector_df, timeframe)
         sendimage('mychart_sectors.png')
+
+main_function(timeframe='1h', periods=7*24)
