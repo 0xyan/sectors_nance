@@ -63,6 +63,6 @@ def charts(sector_name, sectors_df, timeframe, periods):
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d/%m %H:%M'))
 
     plt.savefig('mychart.png')
-    os.rename('mychart.png', 'mychart_sectors.png')
+    #os.rename('mychart.png', 'mychart_sectors.png')
 
     return

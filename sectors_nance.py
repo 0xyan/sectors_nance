@@ -29,30 +29,28 @@ def tg_init():
 
 def init_sectors():
     #sectors
-    high_FDV = ['APTUSDT', 'FILUSDT',  'SUIUSDT', 'WLDUSDT', 'SEIUSDT']
+    high_FDV = ['APTUSDT', 'FILUSDT',  'SUIUSDT', 'WLDUSDT', 'SEIUSDT', 'TIAUSDT']
     chinese = ['NEOUSDT', 'TRXUSDT', 'CFXUSDT', 'ACHUSDT', 'PHBUSDT', 'QTUMUSDT', 'HIGHUSDT', 'ONTUSDT']
     perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'GNSUSDT', 'PERPUSDT']
     L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT']
-    privacy = ['XMRUSDT', 'ZECUSDT', 'DASHUSDT']
-    storage = ['FILUSDT', 'ARUSDT', 'STORJUSDT']
-    btc_forks = ['LTCUSDT', 'BCHUSDT', 'ZECUSDT', 'RVNUSDT', 'DASHUSDT']
+    pow = ['LTCUSDT', 'BCHUSDT', 'ZECUSDT', 'RVNUSDT', 'DASHUSDT']
     btc_eth = ['BTCUSDT', 'ETHUSDT']
     metaverse_games = ['SANDUSDT', 'MANAUSDT', 'ENJUSDT', 'APEUSDT', 'GALAUSDT', 'AXSUSDT', 'FLOWUSDT', 
                         'IMXUSDT', 'HIGHUSDT', 'ALICEUSDT', 'GMTUSDT', 'MAGICUSDT']
-    meme = ['SHIBUSDT', 'DOGEUSDT', 'FLOKIUSDT', 'PEPEUSDT']
+    meme = ['SHIBUSDT', 'DOGEUSDT', 'FLOKIUSDT', 'PEPEUSDT', 'MEME']
     DeFi = ['UNIUSDT', 'AAVEUSDT', 'MKRUSDT', 'SNXUSDT', 'CRVUSDT', 'CVXUSDT', 'LDOUSDT',
                     'DYDXUSDT','1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'YFIUSDT', 'ZRXUSDT', 'GMXUSDT', 'FXSUSDT']
     alt_L1_2020 = ['SOLUSDT', 'NEARUSDT', 'ICPUSDT', 'FTMUSDT', 'ATOMUSDT', 'DOTUSDT', 'AVAXUSDT', 'ALGOUSDT', 'HBARUSDT']
     AI = ['RNDRUSDT', 'FETUSDT', 'OCEANUSDT']
-    recent_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'SEIUSDT', 'EDUUSDT', 'IDUSDT']
-    BNB = ['BNBUSDT']
+    recent_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
     lsd = ['LDOUSDT', 'RPLUSDT', 'FXSUSDT', 'ANKRUSDT']
+    new_listings = ['BLURUSDT', 'MEMEUSDT', 'ORDIUSDT', 'TIAUSDT', 'NTRNUSDT']
 
     #matching names
-    sector_list = [high_FDV, chinese, perps, L2s, privacy, storage, 
-                btc_forks, btc_eth, metaverse_games, meme, DeFi, alt_L1_2020, AI, recent_launchpads, lsd]
-    names_list = ['Low_float_high_FDV', 'Chinese_coins', 'Perps', 'L2s', 'Privacy', 'Storage', 'BTC_forks', 
-                    'BTC+ETH', 'Metaverse', 'Meme', 'DeFi_1.0', 'L1s_2020gen', 'AI', 'recent_launchpads', 'LSDs']
+    sector_list = [high_FDV, chinese, perps, L2s, pow, btc_eth,
+                metaverse_games, meme, DeFi, alt_L1_2020, AI, recent_launchpads, lsd, new_listings]
+    names_list = ['Low_float_high_FDV', 'Chinese_coins', 'Perps', 'L2s', 'PoW', 'BTC+ETH', 'Metaverse',
+                    'Meme', 'DeFi_1.0', 'L1s_2020gen', 'AI', 'recent_launchpads', 'LSDs', 'New_listings']
 
     #Creating a {name:list} of assets dict
     sectors = {name: sector for name, sector in zip(names_list, sector_list)}
@@ -131,7 +129,7 @@ def final_dict_manipulations(final_dict):
             v.loc[i, f'{k}'] = row.mean()
 
     #creating the dataframe with sectors cum ret
-    df_sectors_returns = pd.DataFrame(index = final_dict['Privacy'].index)
+    df_sectors_returns = pd.DataFrame(index = final_dict['Perps'].index)
     for k,v in final_dict.items():
         df_sectors_returns[f'{k}'] = v.iloc[: , -1]
     
@@ -158,7 +156,7 @@ def send_individual_sectors(best_worst_list, final_dict, timeframe, periods, tok
     for i in best_worst_list:
         sector_df = order(final_dict[i])
         charts(i, sector_df, timeframe, periods)
-        sendimage(token_tg, id_tg, 'mychart_sectors.png')
+        sendimage(token_tg, id_tg, 'mychart.png')
 
 async def main(timeframe, startTime=None, periods=None):
     client = await binance_init()
@@ -176,7 +174,7 @@ async def main(timeframe, startTime=None, periods=None):
 
     charts('Equally-weighted sectors', df_sectors_returns, timeframe, periods)
     send(token_tg, id_tg, '%23sectors')
-    sendimage(token_tg,id_tg,'mychart_sectors.png')
+    sendimage(token_tg,id_tg,'mychart.png')
     send_individual_sectors(best_worst_list, final_dict, timeframe, periods, token_tg, id_tg)
 
 '''
@@ -185,11 +183,15 @@ if __name__ == "__main__":
     asyncio.run(main(timeframe='1h', periods=168))
 
 '''
-def job():
+def week():
     asyncio.run(main(timeframe='1h', periods=168))
 
+def three_days():
+    asyncio.run(main(timeframe='15m', periods=288))
+
 def setup_schedule():
-    schedule.every().day.at("15:28").do(job)
+    schedule.every().day.at("08:00").do(week)
+    schedule.every().day.at("10:00").do(three_days)
 
     while True:
         schedule.run_pending()
