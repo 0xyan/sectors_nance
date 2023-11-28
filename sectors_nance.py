@@ -149,13 +149,11 @@ def order(df):
 def best_worst_list_func(df_sectors_returns):
     best_sector = df_sectors_returns.columns[0]
     best_sector_2 = df_sectors_returns.columns[1]
+    best_sector_3 = df_sectors_returns.columns[2]
     worst_sector = df_sectors_returns.columns[-1]
     worst_sector_2 = df_sectors_returns.columns[-2]
     worst_sector_3 = df_sectors_returns.columns[-3]
-    worst_sector_4 = df_sectors_returns.columns[-4]
-    worst_sector_5 = df_sectors_returns.columns[-5]
-    worst_sector_6 = df_sectors_returns.columns[-6]
-    best_worst_list = [best_sector, best_sector_2, worst_sector, worst_sector_2, worst_sector_3, worst_sector_4, worst_sector_5, worst_sector_6]
+    best_worst_list = [best_sector, best_sector_2, best_sector_3, worst_sector, worst_sector_2, worst_sector_3]
 
     return best_worst_list
 
