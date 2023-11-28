@@ -31,26 +31,27 @@ def init_sectors():
     #sectors
     high_FDV = ['APTUSDT', 'FILUSDT',  'SUIUSDT', 'WLDUSDT', 'SEIUSDT', 'TIAUSDT']
     chinese = ['NEOUSDT', 'TRXUSDT', 'CFXUSDT', 'ACHUSDT', 'PHBUSDT', 'QTUMUSDT', 'HIGHUSDT', 'ONTUSDT']
-    perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'GNSUSDT', 'PERPUSDT']
+    perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'PERPUSDT']
     L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT']
-    pow = ['LTCUSDT', 'BCHUSDT', 'ZECUSDT', 'RVNUSDT', 'DASHUSDT']
+    pow = ['LTCUSDT', 'BCHUSDT', 'ZECUSDT', 'RVNUSDT', 'DASHUSDT', 'ETHWUSDT']
     btc_eth = ['BTCUSDT', 'ETHUSDT']
     metaverse_games = ['SANDUSDT', 'MANAUSDT', 'ENJUSDT', 'APEUSDT', 'GALAUSDT', 'AXSUSDT', 'FLOWUSDT', 
                         'IMXUSDT', 'HIGHUSDT', 'ALICEUSDT', 'GMTUSDT', 'MAGICUSDT']
-    meme = ['SHIBUSDT', 'DOGEUSDT', 'FLOKIUSDT', 'PEPEUSDT', 'MEME']
+    meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', 'MEMEUSDT', '1000BONKUSDT']
     DeFi = ['UNIUSDT', 'AAVEUSDT', 'MKRUSDT', 'SNXUSDT', 'CRVUSDT', 'CVXUSDT', 'LDOUSDT',
                     'DYDXUSDT','1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'YFIUSDT', 'ZRXUSDT', 'GMXUSDT', 'FXSUSDT']
     alt_L1_2020 = ['SOLUSDT', 'NEARUSDT', 'ICPUSDT', 'FTMUSDT', 'ATOMUSDT', 'DOTUSDT', 'AVAXUSDT', 'ALGOUSDT', 'HBARUSDT']
     AI = ['RNDRUSDT', 'FETUSDT', 'OCEANUSDT']
     recent_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
-    lsd = ['LDOUSDT', 'RPLUSDT', 'FXSUSDT', 'ANKRUSDT']
-    new_listings = ['BLURUSDT', 'MEMEUSDT', 'ORDIUSDT', 'TIAUSDT', 'NTRNUSDT']
+    new_spot_listings = ['BLURUSDT', 'MEMEUSDT', 'ORDIUSDT', 'TIAUSDT', 'NTRNUSDT']
+    new_perp_listings = ['PYTHUSDT', 'ETHWUSDT', 'ONGUSDT', 'USTCUSDT', '1000BONKUSDT', 'BEAMXUSDT', 'KASUSDT', 'MBLUSDT', 'NTRNUSDT', 'ILVUSDT',
+                         'BADGERUSDT', 'STEEMUSDT', 'ORDIUSDT', 'TOKENUSDT', 'MEMEUSDT', 'TWTUSDT', 'CAKEUSDT', 'SNTUSDT', 'TIAUSDT', 'SLPUSDT']
 
     #matching names
     sector_list = [high_FDV, chinese, perps, L2s, pow, btc_eth,
-                metaverse_games, meme, DeFi, alt_L1_2020, AI, recent_launchpads, lsd, new_listings]
+                metaverse_games, meme, DeFi, alt_L1_2020, AI, recent_launchpads, new_spot_listings, new_perp_listings]
     names_list = ['Low_float_high_FDV', 'Chinese_coins', 'Perps', 'L2s', 'PoW', 'BTC+ETH', 'Metaverse',
-                    'Meme', 'DeFi_1.0', 'L1s_2020gen', 'AI', 'recent_launchpads', 'LSDs', 'New_listings']
+                    'Meme', 'DeFi_1.0', 'L1s_2020gen', 'AI', 'Recent_launchpads', 'New_spot_listings', 'New_perp_listings']
 
     #Creating a {name:list} of assets dict
     sectors = {name: sector for name, sector in zip(names_list, sector_list)}
@@ -59,19 +60,19 @@ def init_sectors():
     
 
 #getting klines function
-async def get_klines(client, symbol, interval, startTime=None, limit=None):
+async def get_klines(client, symbol, interval, start_str=None, limit=None):
+    df = pd.DataFrame()
     try:
-        if startTime is not None and limit is None:
-            klines_data = await client.get_klines(symbol=symbol, interval=interval, startTime=startTime)
-        elif startTime is None and limit is not None:
-            klines_data = await client.get_klines(symbol=symbol, interval=interval, limit=limit)
-        elif startTime is not None and limit is not None:
-            klines_data = await client.get_klines(symbol=symbol, interval=interval, startTime=startTime, limit=limit)
+        if start_str is not None and limit is not None:
+            klines_data = await client.futures_continous_klines(pair=symbol, interval=interval, contractType='PERPETUAL', start_str=start_str, limit=limit)
+        elif start_str is not None and limit is None:
+            klines_data = await client.futures_continous_klines(pair=symbol, interval=interval, contractType='PERPETUAL', start_str=start_str)
+        elif start_str is None and limit is not None:
+            klines_data = await client.futures_continous_klines(pair=symbol, interval=interval, contractType='PERPETUAL', limit=limit)
         else:
-            raise ValueError('either startTime or limit must be provided')
+            raise ValueError('start_str or limit has to be provided')
         
         dfi = pd.DataFrame(klines_data)
-        df = pd.DataFrame()
         df['time'] = dfi[0].astype(float)
         df['time'] = pd.to_datetime(df['time'], unit = 'ms')
         df['close'] = dfi[4].astype(float)
@@ -84,8 +85,10 @@ async def get_klines(client, symbol, interval, startTime=None, limit=None):
         df = df[f'{symbol}']
         df.dropna(inplace = True)
     except Exception as e:
-        print(f'error processing {symbol}:{e}')
+        print(f'error processing {symbol}: {e}')
+    
     return df
+
 
     
 #creating a dictionary with all dataframes
@@ -148,7 +151,11 @@ def best_worst_list_func(df_sectors_returns):
     best_sector_2 = df_sectors_returns.columns[1]
     worst_sector = df_sectors_returns.columns[-1]
     worst_sector_2 = df_sectors_returns.columns[-2]
-    best_worst_list = [best_sector, best_sector_2, worst_sector, worst_sector_2]
+    worst_sector_3 = df_sectors_returns.columns[-3]
+    worst_sector_4 = df_sectors_returns.columns[-4]
+    worst_sector_5 = df_sectors_returns.columns[-5]
+    worst_sector_6 = df_sectors_returns.columns[-6]
+    best_worst_list = [best_sector, best_sector_2, worst_sector, worst_sector_2, worst_sector_3, worst_sector_4, worst_sector_5, worst_sector_6]
 
     return best_worst_list
 
@@ -177,10 +184,10 @@ async def main(timeframe, startTime=None, periods=None):
     sendimage(token_tg,id_tg,'mychart.png')
     send_individual_sectors(best_worst_list, final_dict, timeframe, periods, token_tg, id_tg)
 
-'''
+
 if __name__ == "__main__":
 
-    asyncio.run(main(timeframe='1h', periods=168))
+    asyncio.run(main(timeframe='4h', periods=180))
 
 '''
 def week():
@@ -199,3 +206,4 @@ def setup_schedule():
 
 if __name__ == "__main__":
     setup_schedule()
+'''
