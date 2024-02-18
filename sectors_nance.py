@@ -29,29 +29,33 @@ def tg_init():
 
 def init_sectors():
     #sectors
-    high_FDV = ['APTUSDT', 'FILUSDT',  'SUIUSDT', 'WLDUSDT', 'SEIUSDT', 'TIAUSDT']
-    chinese = ['NEOUSDT', 'TRXUSDT', 'CFXUSDT', 'ACHUSDT', 'PHBUSDT', 'QTUMUSDT', 'HIGHUSDT', 'ONTUSDT']
+    AI = ['RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NFPUSDT']
+    old_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
+    recent_launchpads = ['ALTUSDT', 'MANTAUSDT', 'XAIUSDT', 'AIUSDT']
+    modular = ['TIAUSDT', 'ALTUSDT', 'DYMUSDT', 'MANTAUSDT']
+    solana = ['SOLUSDT', 'JUPUSDT', 'PYTHUSDT', 'JTOUSDT']
+    new_listings = ['DYMUSDT', 'RONINUSDT', 'JUPUSDT', 'ALTUSDT', 'ONDOUSDT', 'XAIUSDT', 'AIUSDT', 'NFPUSDT', 'ACEUSDT', 'JTOUSDT']
+    bitcoin_eco = ['BTCUSDT', 'ORDIUSDT', '1000SATSUSDT', ['STXUSDT']]
+    new_non_evm = ['SUIUSDT', 'SEIUSDT', 'APTUSDT']
     perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'PERPUSDT']
-    L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT']
-    pow = ['LTCUSDT', 'BCHUSDT', 'ZECUSDT', 'RVNUSDT', 'DASHUSDT', 'ETHWUSDT']
+    bluechip_L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT']
     btc_eth = ['BTCUSDT', 'ETHUSDT']
-    metaverse_games = ['SANDUSDT', 'MANAUSDT', 'ENJUSDT', 'APEUSDT', 'GALAUSDT', 'AXSUSDT', 'FLOWUSDT', 
-                        'IMXUSDT', 'HIGHUSDT', 'ALICEUSDT', 'GMTUSDT', 'MAGICUSDT']
-    meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', 'MEMEUSDT', '1000BONKUSDT']
+    gamefi = ['BEAMXUSDT', 'XAIUSDT', 'RONINUSDT', 'ACEUSDT', 'IMXUSDT', 'FLOWUSDT', 'GMTUSDT', 'AXSUSDT', 'APEUSDT',
+              'BIGTIMEUSDT', 'SANDUSDT', 'ILVUSDT', 'GALAUSDT']
+    meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', '1000BONKUSDT']
     DeFi = ['UNIUSDT', 'AAVEUSDT', 'MKRUSDT', 'SNXUSDT', 'CRVUSDT', 'CVXUSDT', 'LDOUSDT',
                     'DYDXUSDT','1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'YFIUSDT', 'ZRXUSDT', 'GMXUSDT', 'FXSUSDT']
     alt_L1_2020 = ['SOLUSDT', 'NEARUSDT', 'ICPUSDT', 'FTMUSDT', 'ATOMUSDT', 'DOTUSDT', 'AVAXUSDT', 'ALGOUSDT', 'HBARUSDT']
-    AI = ['RNDRUSDT', 'FETUSDT', 'OCEANUSDT']
-    recent_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
-    new_spot_listings = ['BLURUSDT', 'MEMEUSDT', 'ORDIUSDT', 'TIAUSDT', 'NTRNUSDT']
-    new_perp_listings = ['PYTHUSDT', 'ETHWUSDT', 'ONGUSDT', 'USTCUSDT', '1000BONKUSDT', 'BEAMXUSDT', 'KASUSDT', 'MBLUSDT', 'NTRNUSDT', 'ILVUSDT',
-                         'BADGERUSDT', 'STEEMUSDT', 'ORDIUSDT', 'TOKENUSDT', 'MEMEUSDT', 'TWTUSDT', 'CAKEUSDT', 'SNTUSDT', 'TIAUSDT', 'SLPUSDT']
+    #pow = ['LTCUSDT', 'BCHUSDT', 'ZECUSDT', 'RVNUSDT', 'DASHUSDT', 'ETHWUSDT']
+    #chinese = ['NEOUSDT', 'TRXUSDT', 'CFXUSDT', 'ACHUSDT', 'PHBUSDT', 'QTUMUSDT', 'HIGHUSDT', 'ONTUSDT']
+
+
 
     #matching names
-    sector_list = [high_FDV, chinese, perps, L2s, pow, btc_eth,
-                metaverse_games, meme, DeFi, alt_L1_2020, AI, recent_launchpads, new_spot_listings, new_perp_listings]
-    names_list = ['Low_float_high_FDV', 'Chinese_coins', 'Perps', 'L2s', 'PoW', 'BTC+ETH', 'Metaverse',
-                    'Meme', 'DeFi_1.0', 'L1s_2020gen', 'AI', 'Recent_launchpads', 'New_spot_listings', 'New_perp_listings']
+    sector_list = [AI, old_launchpads, recent_launchpads, modular, solana, new_listings, bitcoin_eco,
+                new_non_evm, perps, bluechip_L2s, btc_eth, gamefi, meme, DeFi, alt_L1_2020]
+    names_list = ['AI', 'old_launchpads', 'recent_launchpads', 'modular', 'solana_ecosystem', 'new_listings', 'bitcoin_eco',
+                    'new_L1_non_evm', 'perps', 'bluechip_L2s', 'btc_eth', 'gamefi', 'meme', 'DeFi', 'alt_L1_2020']
 
     #Creating a {name:list} of assets dict
     sectors = {name: sector for name, sector in zip(names_list, sector_list)}
@@ -132,7 +136,7 @@ def final_dict_manipulations(final_dict):
             v.loc[i, f'{k}'] = row.mean()
 
     #creating the dataframe with sectors cum ret
-    df_sectors_returns = pd.DataFrame(index = final_dict['Perps'].index)
+    df_sectors_returns = pd.DataFrame(index = final_dict['perps'].index)
     for k,v in final_dict.items():
         df_sectors_returns[f'{k}'] = v.iloc[: , -1]
     
@@ -182,7 +186,7 @@ async def main(timeframe, startTime=None, periods=None):
     sendimage(token_tg,id_tg,'mychart.png')
     send_individual_sectors(best_worst_list, final_dict, timeframe, periods, token_tg, id_tg)
 
-
+'''
 if __name__ == "__main__":
 
     asyncio.run(main(timeframe='4h', periods=180))
@@ -194,14 +198,18 @@ def week():
 def three_days():
     asyncio.run(main(timeframe='15m', periods=288))
 
+def month():
+    asyncio.run(main(timeframe='4h', periods=180))
+
 def setup_schedule():
-    schedule.every().day.at("08:00").do(week)
-    schedule.every().day.at("10:00").do(three_days)
+    schedule.every().wednesday.at("12:00").do(week)
+    schedule.every().saturday.at("12:00").do(week)
+    schedule.every().day.at("08:00").do(three_days)
+    schedule.every().monday.at("12:00").do(month)
 
     while True:
         schedule.run_pending()
         time.sleep(1)
 
 if __name__ == "__main__":
-    setup_schedule()
-'''
+    month()
