@@ -35,7 +35,7 @@ def init_sectors():
     modular = ['TIAUSDT', 'ALTUSDT', 'DYMUSDT', 'MANTAUSDT']
     solana = ['SOLUSDT', 'JUPUSDT', 'PYTHUSDT', 'JTOUSDT']
     new_listings = ['DYMUSDT', 'RONINUSDT', 'JUPUSDT', 'ALTUSDT', 'ONDOUSDT', 'XAIUSDT', 'AIUSDT', 'NFPUSDT', 'ACEUSDT', 'JTOUSDT']
-    bitcoin_eco = ['BTCUSDT', 'ORDIUSDT', '1000SATSUSDT', ['STXUSDT']]
+    bitcoin_eco = ['BTCUSDT', 'ORDIUSDT', '1000SATSUSDT', 'STXUSDT']
     new_non_evm = ['SUIUSDT', 'SEIUSDT', 'APTUSDT']
     perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'PERPUSDT']
     bluechip_L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT']
@@ -169,29 +169,26 @@ def send_individual_sectors(best_worst_list, final_dict, timeframe, periods, tok
 
 async def main(timeframe, startTime=None, periods=None):
     client = await binance_init()
-    token_tg, id_tg = tg_init()
-    sectors = init_sectors()
-
     try:
-        final_dict = await create_sector_dfs(client, sectors=sectors, startTime=startTime, interval=timeframe, limit=periods)
-    except Exception as e:
-        print(f'error in function final_dict: {e}')
+        token_tg, id_tg = tg_init()
+        sectors = init_sectors()
 
-    df_sectors_returns = final_dict_manipulations(final_dict)
-    df_sectors_returns = order(df_sectors_returns)
-    best_worst_list = best_worst_list_func(df_sectors_returns)
+        try:
+            final_dict = await create_sector_dfs(client, sectors=sectors, startTime=startTime, interval=timeframe, limit=periods)
+        except Exception as e:
+            print(f'error in function final_dict: {e}')
 
-    charts('Equally-weighted sectors', df_sectors_returns, timeframe, periods)
-    send(token_tg, id_tg, '%23sectors')
-    sendimage(token_tg,id_tg,'mychart.png')
-    send_individual_sectors(best_worst_list, final_dict, timeframe, periods, token_tg, id_tg)
+        df_sectors_returns = final_dict_manipulations(final_dict)
+        df_sectors_returns = order(df_sectors_returns)
+        best_worst_list = best_worst_list_func(df_sectors_returns)
 
-'''
-if __name__ == "__main__":
+        charts('Equally-weighted sectors', df_sectors_returns, timeframe, periods)
+        send(token_tg, id_tg, '%23sectors')
+        sendimage(token_tg,id_tg,'mychart.png')
+        send_individual_sectors(best_worst_list, final_dict, timeframe, periods, token_tg, id_tg)
+    finally:
+        await client.close_connection()
 
-    asyncio.run(main(timeframe='4h', periods=180))
-
-'''
 def week():
     asyncio.run(main(timeframe='1h', periods=168))
 
@@ -204,7 +201,7 @@ def month():
 def setup_schedule():
     schedule.every().wednesday.at("12:00").do(week)
     schedule.every().saturday.at("12:00").do(week)
-    schedule.every().day.at("08:00").do(three_days)
+    schedule.every().day.at("10:58").do(three_days)
     schedule.every().monday.at("12:00").do(month)
 
     while True:
@@ -212,4 +209,4 @@ def setup_schedule():
         time.sleep(1)
 
 if __name__ == "__main__":
-    month()
+    setup_schedule()
