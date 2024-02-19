@@ -155,9 +155,9 @@ def best_worst_list_func(df_sectors_returns):
     best_sector_2 = df_sectors_returns.columns[1]
     best_sector_3 = df_sectors_returns.columns[2]
     worst_sector = df_sectors_returns.columns[-1]
-    worst_sector_2 = df_sectors_returns.columns[-2]
-    worst_sector_3 = df_sectors_returns.columns[-3]
-    best_worst_list = [best_sector, best_sector_2, best_sector_3, worst_sector, worst_sector_2, worst_sector_3]
+    #worst_sector_2 = df_sectors_returns.columns[-2]
+    #worst_sector_3 = df_sectors_returns.columns[-3]
+    best_worst_list = [best_sector, best_sector_2, best_sector_3, worst_sector]
 
     return best_worst_list
 
@@ -201,7 +201,7 @@ def month():
 def setup_schedule():
     schedule.every().wednesday.at("12:00").do(week)
     schedule.every().saturday.at("12:00").do(week)
-    schedule.every().day.at("10:58").do(three_days)
+    schedule.every().day.at("08:00").do(three_days)
     schedule.every().monday.at("12:00").do(month)
 
     while True:
