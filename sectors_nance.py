@@ -29,20 +29,20 @@ def tg_init():
 
 def init_sectors():
     #sectors
-    AI = ['RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NFPUSDT']
+    AI = ['TAOUSDT', 'RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NFPUSDT']
     old_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
-    recent_launchpads = ['ALTUSDT', 'MANTAUSDT', 'XAIUSDT', 'AIUSDT']
+    recent_launchpads = ['ENAUSDT', 'AEVOUSDT', 'ETHFIUSDT', 'ALTUSDT', 'MANTAUSDT', 'XAIUSDT', 'AIUSDT']
     modular = ['TIAUSDT', 'ALTUSDT', 'DYMUSDT', 'MANTAUSDT']
-    solana = ['SOLUSDT', 'JUPUSDT', 'PYTHUSDT', 'JTOUSDT']
-    new_listings = ['DYMUSDT', 'RONINUSDT', 'JUPUSDT', 'ALTUSDT', 'ONDOUSDT', 'XAIUSDT', 'AIUSDT', 'NFPUSDT', 'ACEUSDT', 'JTOUSDT']
+    solana = ['SOLUSDT', 'JUPUSDT', 'PYTHUSDT', 'JTOUSDT', 'TNSRUSDT', 'WUSDT']
+    new_listings = ['WUSDT', 'TAOUSDT', 'SAGAUSDT', 'TNSRUSDT', 'ENAUSDT', 'AEVOUSDT', 'RONINUSDT', 'JUPUSDT', 'ETHFI', 'JTOUSDT']
     bitcoin_eco = ['BTCUSDT', 'ORDIUSDT', '1000SATSUSDT', 'STXUSDT']
     new_non_evm = ['SUIUSDT', 'SEIUSDT', 'APTUSDT']
-    perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'PERPUSDT']
+    perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'PERPUSDT', 'AEVOUSDT']
     bluechip_L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT']
     btc_eth = ['BTCUSDT', 'ETHUSDT']
     gamefi = ['BEAMXUSDT', 'XAIUSDT', 'RONINUSDT', 'ACEUSDT', 'IMXUSDT', 'FLOWUSDT', 'GMTUSDT', 'AXSUSDT', 'APEUSDT',
               'BIGTIMEUSDT', 'SANDUSDT', 'ILVUSDT', 'GALAUSDT']
-    meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', '1000BONKUSDT']
+    meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', '1000BONKUSDT', 'WIFUSDT', 'BOMEUSDT']
     DeFi = ['UNIUSDT', 'AAVEUSDT', 'MKRUSDT', 'SNXUSDT', 'CRVUSDT', 'CVXUSDT', 'LDOUSDT',
                     'DYDXUSDT','1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'YFIUSDT', 'ZRXUSDT', 'GMXUSDT', 'FXSUSDT']
     alt_L1_2020 = ['SOLUSDT', 'NEARUSDT', 'ICPUSDT', 'FTMUSDT', 'ATOMUSDT', 'DOTUSDT', 'AVAXUSDT', 'ALGOUSDT', 'HBARUSDT']
@@ -198,6 +198,10 @@ def three_days():
 def month():
     asyncio.run(main(timeframe='4h', periods=180))
 
+def day():
+    asyncio.run(main(timeframe='5m', periods=288))
+
+'''
 def setup_schedule():
     schedule.every().wednesday.at("12:00").do(week)
     schedule.every().saturday.at("12:00").do(week)
@@ -208,5 +212,6 @@ def setup_schedule():
         schedule.run_pending()
         time.sleep(1)
 
+        '''
 if __name__ == "__main__":
-    setup_schedule()
+    week()
