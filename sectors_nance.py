@@ -29,19 +29,19 @@ def tg_init():
 
 def init_sectors():
     #sectors
-    AI = ['TAOUSDT', 'RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NFPUSDT']
+    AI = ['TAOUSDT', 'RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT']
     old_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
-    recent_launchpads = ['ENAUSDT', 'AEVOUSDT', 'ETHFIUSDT', 'ALTUSDT', 'MANTAUSDT', 'XAIUSDT', 'AIUSDT']
-    modular = ['TIAUSDT', 'ALTUSDT', 'DYMUSDT', 'MANTAUSDT']
+    recent_launchpads = ['OMNIUSDT', 'SAGAUSDT', 'ENAUSDT', 'ETHFIUSDT', 'PORTALUSDT', 'ALTUSDT', 'MANTAUSDT']
+    modular_restaking = ['TIAUSDT', 'MANTAUSDT', 'ALTUSDT', 'DYMUSDT', 'ETHFIUSDT', 'OMNIUSDT']
     solana = ['SOLUSDT', 'JUPUSDT', 'PYTHUSDT', 'JTOUSDT', 'TNSRUSDT', 'WUSDT']
-    new_listings = ['WUSDT', 'TAOUSDT', 'SAGAUSDT', 'TNSRUSDT', 'ENAUSDT', 'AEVOUSDT', 'RONINUSDT', 'JUPUSDT', 'ETHFI', 'JTOUSDT']
+    new_listings = ['OMNIUSDT', 'TAOUSDT', 'SAGAUSDT', 'TNSRUSDT', 'WUSDT', 'ENAUSDT', 'ETHFIUSDT', 'AXLUSDT']
     bitcoin_eco = ['BTCUSDT', 'ORDIUSDT', '1000SATSUSDT', 'STXUSDT']
     new_non_evm = ['SUIUSDT', 'SEIUSDT', 'APTUSDT']
     perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'PERPUSDT', 'AEVOUSDT']
-    bluechip_L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT']
+    bluechip_L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT', 'STRKUSDT']
     btc_eth = ['BTCUSDT', 'ETHUSDT']
     gamefi = ['BEAMXUSDT', 'XAIUSDT', 'RONINUSDT', 'ACEUSDT', 'IMXUSDT', 'FLOWUSDT', 'GMTUSDT', 'AXSUSDT', 'APEUSDT',
-              'BIGTIMEUSDT', 'SANDUSDT', 'ILVUSDT', 'GALAUSDT']
+              'BIGTIMEUSDT', 'SANDUSDT', 'ILVUSDT', 'GALAUSDT', 'PIXELUSDT']
     meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', '1000BONKUSDT', 'WIFUSDT', 'BOMEUSDT']
     DeFi = ['UNIUSDT', 'AAVEUSDT', 'MKRUSDT', 'SNXUSDT', 'CRVUSDT', 'CVXUSDT', 'LDOUSDT',
                     'DYDXUSDT','1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'YFIUSDT', 'ZRXUSDT', 'GMXUSDT', 'FXSUSDT']
@@ -52,9 +52,9 @@ def init_sectors():
 
 
     #matching names
-    sector_list = [AI, old_launchpads, recent_launchpads, modular, solana, new_listings, bitcoin_eco,
+    sector_list = [AI, old_launchpads, recent_launchpads, modular_restaking, solana, new_listings, bitcoin_eco,
                 new_non_evm, perps, bluechip_L2s, btc_eth, gamefi, meme, DeFi, alt_L1_2020]
-    names_list = ['AI', 'old_launchpads', 'recent_launchpads', 'modular', 'solana_ecosystem', 'new_listings', 'bitcoin_eco',
+    names_list = ['AI', 'old_launchpads', 'recent_launchpads', 'modular_restaking', 'solana_ecosystem', 'new_listings', 'bitcoin_eco',
                     'new_L1_non_evm', 'perps', 'bluechip_L2s', 'btc_eth', 'gamefi', 'meme', 'DeFi', 'alt_L1_2020']
 
     #Creating a {name:list} of assets dict
