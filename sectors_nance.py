@@ -155,9 +155,9 @@ def best_worst_list_func(df_sectors_returns):
     best_sector_2 = df_sectors_returns.columns[1]
     best_sector_3 = df_sectors_returns.columns[2]
     worst_sector = df_sectors_returns.columns[-1]
-    #worst_sector_2 = df_sectors_returns.columns[-2]
-    #worst_sector_3 = df_sectors_returns.columns[-3]
-    best_worst_list = [best_sector, best_sector_2, best_sector_3, worst_sector]
+    worst_sector_2 = df_sectors_returns.columns[-2]
+    worst_sector_3 = df_sectors_returns.columns[-3]
+    best_worst_list = [best_sector, best_sector_2, best_sector_3, worst_sector, worst_sector_2, worst_sector_3]
 
     return best_worst_list
 
