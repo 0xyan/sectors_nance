@@ -29,7 +29,7 @@ def tg_init():
 
 def init_sectors():
     #sectors
-    AI = ['TAOUSDT', 'RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT']
+    AI = ['ARUSDT', 'TAOUSDT', 'RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT']
     old_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
     recent_launchpads = ['OMNIUSDT', 'SAGAUSDT', 'ENAUSDT', 'ETHFIUSDT', 'PORTALUSDT', 'ALTUSDT', 'MANTAUSDT']
     modular_restaking = ['TIAUSDT', 'MANTAUSDT', 'ALTUSDT', 'DYMUSDT', 'ETHFIUSDT', 'OMNIUSDT']
@@ -201,17 +201,12 @@ def month():
 def day():
     asyncio.run(main(timeframe='5m', periods=288))
 
-'''
+
 def setup_schedule():
     schedule.every().wednesday.at("12:00").do(week)
-    schedule.every().saturday.at("12:00").do(week)
-    schedule.every().day.at("08:00").do(three_days)
+    schedule.every().day.at("08:15").do(three_days)
     schedule.every().monday.at("12:00").do(month)
 
     while True:
         schedule.run_pending()
         time.sleep(1)
-
-        '''
-if __name__ == "__main__":
-    week()
