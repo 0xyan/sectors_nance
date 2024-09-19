@@ -209,14 +209,10 @@ def month():
 def day():
     asyncio.run(main(timeframe='5m', periods=288))
 
-<<<<<<< HEAD
 def nine_days():
     asyncio.run(main(timeframe='1h', periods=216))
 
 '''
-=======
-
->>>>>>> origin/main
 def setup_schedule():
     schedule.every().wednesday.at("12:00").do(week)
     schedule.every().day.at("08:15").do(three_days)
@@ -225,10 +221,7 @@ def setup_schedule():
     while True:
         schedule.run_pending()
         time.sleep(1)
-<<<<<<< HEAD
 
         '''
 if __name__ == "__main__":
     three_days()
-=======
->>>>>>> origin/main
