@@ -29,7 +29,11 @@ def tg_init():
 
 def init_sectors():
     #sectors
+<<<<<<< HEAD
     AI = ['TAOUSDT', 'RENDERUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT', 'ARUSDT', 'IOUSDT']
+=======
+    AI = ['ARUSDT', 'TAOUSDT', 'RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT']
+>>>>>>> origin/main
     old_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
     recent_launchpads = ['DOGSUSDT', 'IOUSDT', 'NOTUSDT', 'REZUSDT', 'OMNIUSDT', 'SAGAUSDT', 'ENAUSDT', 'ETHFIUSDT']
     modular_restaking = ['TIAUSDT', 'MANTAUSDT', 'ALTUSDT', 'DYMUSDT', 'ETHFIUSDT', 'OMNIUSDT', 'REZUSDT']
@@ -209,20 +213,26 @@ def month():
 def day():
     asyncio.run(main(timeframe='5m', periods=288))
 
+<<<<<<< HEAD
 def nine_days():
     asyncio.run(main(timeframe='1h', periods=216))
 
 '''
+=======
+
+>>>>>>> origin/main
 def setup_schedule():
     schedule.every().wednesday.at("12:00").do(week)
-    schedule.every().saturday.at("12:00").do(week)
-    schedule.every().day.at("08:00").do(three_days)
+    schedule.every().day.at("08:15").do(three_days)
     schedule.every().monday.at("12:00").do(month)
 
     while True:
         schedule.run_pending()
         time.sleep(1)
+<<<<<<< HEAD
 
         '''
 if __name__ == "__main__":
     three_days()
+=======
+>>>>>>> origin/main
