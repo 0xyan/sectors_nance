@@ -29,11 +29,7 @@ def tg_init():
 
 def init_sectors():
     #sectors
-<<<<<<< HEAD
     AI = ['TAOUSDT', 'RENDERUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT', 'ARUSDT', 'IOUSDT']
-=======
-    AI = ['ARUSDT', 'TAOUSDT', 'RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT']
->>>>>>> origin/main
     old_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
     recent_launchpads = ['DOGSUSDT', 'IOUSDT', 'NOTUSDT', 'REZUSDT', 'OMNIUSDT', 'SAGAUSDT', 'ENAUSDT', 'ETHFIUSDT']
     modular_restaking = ['TIAUSDT', 'MANTAUSDT', 'ALTUSDT', 'DYMUSDT', 'ETHFIUSDT', 'OMNIUSDT', 'REZUSDT']
