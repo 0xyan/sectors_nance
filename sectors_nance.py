@@ -29,22 +29,22 @@ def tg_init():
 
 def init_sectors():
     #sectors
-    AI = ['TAOUSDT', 'RNDRUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT']
+    AI = ['TAOUSDT', 'RENDERUSDT', 'FETUSDT', 'OCEANUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT', 'ARUSDT', 'IOUSDT']
     old_launchpads = ['CYBERUSDT', 'ARKMUSDT', 'MAVUSDT', 'EDUUSDT', 'IDUSDT']
-    recent_launchpads = ['OMNIUSDT', 'SAGAUSDT', 'ENAUSDT', 'ETHFIUSDT', 'PORTALUSDT', 'ALTUSDT', 'MANTAUSDT']
-    modular_restaking = ['TIAUSDT', 'MANTAUSDT', 'ALTUSDT', 'DYMUSDT', 'ETHFIUSDT', 'OMNIUSDT']
+    recent_launchpads = ['DOGSUSDT', 'IOUSDT', 'NOTUSDT', 'REZUSDT', 'OMNIUSDT', 'SAGAUSDT', 'ENAUSDT', 'ETHFIUSDT']
+    modular_restaking = ['TIAUSDT', 'MANTAUSDT', 'ALTUSDT', 'DYMUSDT', 'ETHFIUSDT', 'OMNIUSDT', 'REZUSDT']
     solana = ['SOLUSDT', 'JUPUSDT', 'PYTHUSDT', 'JTOUSDT', 'TNSRUSDT', 'WUSDT']
-    new_listings = ['OMNIUSDT', 'TAOUSDT', 'SAGAUSDT', 'TNSRUSDT', 'WUSDT', 'ENAUSDT', 'ETHFIUSDT', 'AXLUSDT']
     bitcoin_eco = ['BTCUSDT', 'ORDIUSDT', '1000SATSUSDT', 'STXUSDT']
     new_non_evm = ['SUIUSDT', 'SEIUSDT', 'APTUSDT']
     perps = ['GMXUSDT', 'SNXUSDT', 'DYDXUSDT', 'PERPUSDT', 'AEVOUSDT']
-    bluechip_L2s = ['ARBUSDT', 'MATICUSDT', 'OPUSDT', 'STRKUSDT']
+    bluechip_L2s = ['ARBUSDT', 'POLUSDT', 'OPUSDT', 'STRKUSDT', 'ZKUSDT']
+    ton_ecosystem = ['TONUSDT', 'NOTUSDT', 'DOGSUSDT']
     btc_eth = ['BTCUSDT', 'ETHUSDT']
     gamefi = ['BEAMXUSDT', 'XAIUSDT', 'RONINUSDT', 'ACEUSDT', 'IMXUSDT', 'FLOWUSDT', 'GMTUSDT', 'AXSUSDT', 'APEUSDT',
               'BIGTIMEUSDT', 'SANDUSDT', 'ILVUSDT', 'GALAUSDT', 'PIXELUSDT']
-    meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', '1000BONKUSDT', 'WIFUSDT', 'BOMEUSDT']
+    meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', '1000BONKUSDT', 'WIFUSDT', 'BOMEUSDT', 'POPCATUSDT', 'MEWUSDT']
     DeFi = ['UNIUSDT', 'AAVEUSDT', 'MKRUSDT', 'SNXUSDT', 'CRVUSDT', 'CVXUSDT', 'LDOUSDT',
-                    'DYDXUSDT','1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'YFIUSDT', 'ZRXUSDT', 'GMXUSDT', 'FXSUSDT']
+                    'DYDXUSDT','1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'ZRXUSDT', 'GMXUSDT', 'FXSUSDT']
     alt_L1_2020 = ['SOLUSDT', 'NEARUSDT', 'ICPUSDT', 'FTMUSDT', 'ATOMUSDT', 'DOTUSDT', 'AVAXUSDT', 'ALGOUSDT', 'HBARUSDT']
     #pow = ['LTCUSDT', 'BCHUSDT', 'ZECUSDT', 'RVNUSDT', 'DASHUSDT', 'ETHWUSDT']
     #chinese = ['NEOUSDT', 'TRXUSDT', 'CFXUSDT', 'ACHUSDT', 'PHBUSDT', 'QTUMUSDT', 'HIGHUSDT', 'ONTUSDT']
@@ -52,10 +52,10 @@ def init_sectors():
 
 
     #matching names
-    sector_list = [AI, old_launchpads, recent_launchpads, modular_restaking, solana, new_listings, bitcoin_eco,
-                new_non_evm, perps, bluechip_L2s, btc_eth, gamefi, meme, DeFi, alt_L1_2020]
-    names_list = ['AI', 'old_launchpads', 'recent_launchpads', 'modular_restaking', 'solana_ecosystem', 'new_listings', 'bitcoin_eco',
-                    'new_L1_non_evm', 'perps', 'bluechip_L2s', 'btc_eth', 'gamefi', 'meme', 'DeFi', 'alt_L1_2020']
+    sector_list = [AI, old_launchpads, recent_launchpads, modular_restaking, solana, bitcoin_eco,
+                new_non_evm, perps, bluechip_L2s, ton_ecosystem, btc_eth, gamefi, meme, DeFi, alt_L1_2020]
+    names_list = ['AI', 'old_launchpads', 'recent_launchpads', 'modular_restaking', 'solana_ecosystem', 'bitcoin_eco',
+                    'new_L1_non_evm', 'perps', 'bluechip_L2s', 'ton_ecosystem', 'btc_eth', 'gamefi', 'meme', 'DeFi', 'alt_L1_2020']
 
     #Creating a {name:list} of assets dict
     sectors = {name: sector for name, sector in zip(names_list, sector_list)}
@@ -154,10 +154,18 @@ def best_worst_list_func(df_sectors_returns):
     best_sector = df_sectors_returns.columns[0]
     best_sector_2 = df_sectors_returns.columns[1]
     best_sector_3 = df_sectors_returns.columns[2]
+    best_sector_4 = df_sectors_returns.columns[3]
+    best_sector_5 = df_sectors_returns.columns[4]
     worst_sector = df_sectors_returns.columns[-1]
     worst_sector_2 = df_sectors_returns.columns[-2]
     worst_sector_3 = df_sectors_returns.columns[-3]
-    best_worst_list = [best_sector, best_sector_2, best_sector_3, worst_sector, worst_sector_2, worst_sector_3]
+    worst_sector_4 = df_sectors_returns.columns[-4]
+    worst_sector_5 = df_sectors_returns.columns[-5]
+    worst_sector_6 = df_sectors_returns.columns[-6]
+    worst_sector_7 = df_sectors_returns.columns[-7]
+
+
+    best_worst_list = [best_sector, best_sector_2, best_sector_3, best_sector_4, best_sector_5, worst_sector, worst_sector_2, worst_sector_3, worst_sector_4, worst_sector_5, worst_sector_6, worst_sector_7]
 
     return best_worst_list
 
@@ -201,6 +209,9 @@ def month():
 def day():
     asyncio.run(main(timeframe='5m', periods=288))
 
+def nine_days():
+    asyncio.run(main(timeframe='1h', periods=216))
+
 '''
 def setup_schedule():
     schedule.every().wednesday.at("12:00").do(week)
@@ -214,4 +225,4 @@ def setup_schedule():
 
         '''
 if __name__ == "__main__":
-    week()
+    three_days()
