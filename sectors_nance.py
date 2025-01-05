@@ -211,19 +211,50 @@ async def main(timeframe, startTime=None, periods=None):
         await client.close_connection()
 
 def week():
-    asyncio.run(main(timeframe='1h', periods=168))
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    
+    loop.run_until_complete(main(timeframe='1h', periods=168))
 
 def three_days():
-    asyncio.run(main(timeframe='15m', periods=288))
+    # Ensure we're using a fresh event loop for each scheduled run
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    
+    loop.run_until_complete(main(timeframe='15m', startTime=None, periods=288))
 
 def month():
-    asyncio.run(main(timeframe='4h', periods=180))
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    
+    loop.run_until_complete(main(timeframe='4h', startTime=None, periods=180))
 
 def day():
-    asyncio.run(main(timeframe='5m', periods=288))
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    
+    loop.run_until_complete(main(timeframe='5m', periods=288))
 
 def nine_days():
-    asyncio.run(main(timeframe='1h', periods=216))
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    
+    loop.run_until_complete(main(timeframe='1h', startTime=None, periods=216))
 
 
 def setup_schedule():
