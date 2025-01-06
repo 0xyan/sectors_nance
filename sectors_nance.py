@@ -123,34 +123,38 @@ async def create_sector_dfs(client, sectors, interval, startTime=None, limit=Non
         tasks = [fetch_asset_df(asset) for asset in assets]
         asset_dfs = await asyncio.gather(*tasks)
         
-        # initialize an empty dataframe for the sector
-        sector_df = pd.DataFrame()
-
-        # iterate over each asset in the sector
-        for asset_df in asset_dfs:
-            if asset_df is not None:
-                if sector_df.empty:
-                    sector_df = asset_df
-                else:
-                    sector_df = pd.merge(sector_df, asset_df, left_index=True, right_index=True, how='outer')
-
-        # add the sector dataframe to the dictionary
-        sector_dict_final[sector_name] = sector_df
+        # Filter out None values
+        valid_dfs = [df for df in asset_dfs if df is not None]
+        
+        if valid_dfs:
+            # Use inner merge first to get common timestamps
+            sector_df = valid_dfs[0]
+            for df in valid_dfs[1:]:
+                sector_df = pd.merge(sector_df, df, left_index=True, right_index=True, how='inner')
+            
+            sector_dict_final[sector_name] = sector_df
 
     return sector_dict_final
 
 def final_dict_manipulations(final_dict):
-    #calculating an equal-weighted return
+    # calculating an equal-weighted return
     for k,v in final_dict.items():
         for i, row in v.iterrows():
-            v.loc[i, f'{k}'] = row.mean()
+            # Calculate mean ignoring NaN values
+            v.loc[i, f'{k}'] = row.dropna().mean()
 
-    #creating the dataframe with sectors cum ret
-    df_sectors_returns = pd.DataFrame(index = final_dict['btc+eth'].index)
+    # creating the dataframe with sectors cum ret
+    df_sectors_returns = pd.DataFrame(index=final_dict['btc+eth'].index)
     for k,v in final_dict.items():
-        df_sectors_returns[f'{k}'] = v.iloc[: , -1]
+        series = v.iloc[:, -1]
+        # If the last value is NaN, use the last valid value
+        if pd.isna(series.iloc[-1]):
+            last_valid = series.last_valid_index()
+            if last_valid is not None:
+                series.iloc[-1] = series[last_valid]
+        df_sectors_returns[f'{k}'] = series
     
-    return(df_sectors_returns)
+    return df_sectors_returns
 
 #get order for charts to plot in descending order
 def order(df):
@@ -211,50 +215,19 @@ async def main(timeframe, startTime=None, periods=None):
         await client.close_connection()
 
 def week():
-    try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    
-    loop.run_until_complete(main(timeframe='1h', periods=168))
+    asyncio.run(main(timeframe='1h', periods=168))
 
 def three_days():
-    # Ensure we're using a fresh event loop for each scheduled run
-    try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    
-    loop.run_until_complete(main(timeframe='15m', startTime=None, periods=288))
+    asyncio.run(main(timeframe='15m', periods=288))
 
 def month():
-    try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    
-    loop.run_until_complete(main(timeframe='4h', startTime=None, periods=180))
+    asyncio.run(main(timeframe='4h', periods=180))
 
 def day():
-    try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    
-    loop.run_until_complete(main(timeframe='5m', periods=288))
+    asyncio.run(main(timeframe='5m', periods=288))
 
 def nine_days():
-    try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    
-    loop.run_until_complete(main(timeframe='1h', startTime=None, periods=216))
+    asyncio.run(main(timeframe='1h', periods=216))
 
 
 def setup_schedule():
