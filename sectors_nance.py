@@ -49,7 +49,7 @@ def init_sectors():
     meme_futs_only = ['1000000MOGUSDT', 'PONKEUSDT', 'MOODENGUSDT', 'CHILLGUYUSDT', 'POPCATUSDT', 'SPXUSDT', 'SLERFUSDT', 'DEGENUSDT', 
                       'MEWUSDT', "BRETTUSDT", "NEIROETHUSDT"]
     DeFi = ['UNIUSDT', 'AAVEUSDT', 'MKRUSDT', 'SNXUSDT', 'CRVUSDT', 'LDOUSDT', '1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'ZRXUSDT', 'FXSUSDT']
-    alt_L1_2020 = ['NEARUSDT', 'ICPUSDT', 'FTMUSDT', 'ATOMUSDT', 'DOTUSDT', 'AVAXUSDT', 'ALGOUSDT', 'HBARUSDT']
+    alt_L1_2020 = ['NEARUSDT', 'ICPUSDT', 'ATOMUSDT', 'DOTUSDT', 'AVAXUSDT', 'ALGOUSDT', 'HBARUSDT']
     dino = ['ADAUSDT', 'LTCUSDT', 'XRPUSDT', 'DASHUSDT', 'XLMUSDT', 'BCHUSDT', 'ETCUSDT' ]
     #bitcoin_ecosystem = ['BTCUSDT', 'ORDIUSDT', '1000SATSUSDT', 'STXUSDT']
 
@@ -137,22 +137,18 @@ async def create_sector_dfs(client, sectors, interval, startTime=None, limit=Non
     return sector_dict_final
 
 def final_dict_manipulations(final_dict):
-    # calculating an equal-weighted return
+    #calculating an equal-weighted return
     for k,v in final_dict.items():
         for i, row in v.iterrows():
-            # Calculate mean ignoring NaN values
-            v.loc[i, f'{k}'] = row.dropna().mean()
+            # Calculate mean of only the asset columns, not including the sector column
+            if k in v.columns:
+                v = v.drop(columns=[k])  # Remove sector column if it exists
+            v.loc[i, k] = row.dropna().mean()  # Use dropna() to handle any missing values
 
-    # creating the dataframe with sectors cum ret
-    df_sectors_returns = pd.DataFrame(index=final_dict['btc+eth'].index)
+    #creating the dataframe with sectors cum ret
+    df_sectors_returns = pd.DataFrame(index = final_dict['btc+eth'].index)
     for k,v in final_dict.items():
-        series = v.iloc[:, -1]
-        # If the last value is NaN, use the last valid value
-        if pd.isna(series.iloc[-1]):
-            last_valid = series.last_valid_index()
-            if last_valid is not None:
-                series.iloc[-1] = series[last_valid]
-        df_sectors_returns[f'{k}'] = series
+        df_sectors_returns[k] = v[k]  # Get the sector column directly
     
     return df_sectors_returns
 
