@@ -137,18 +137,16 @@ async def create_sector_dfs(client, sectors, interval, startTime=None, limit=Non
     return sector_dict_final
 
 def final_dict_manipulations(final_dict):
-    #calculating an equal-weighted return
+    # Calculate equal-weighted return for each sector
     for k,v in final_dict.items():
-        for i, row in v.iterrows():
-            # Calculate mean of only the asset columns, not including the sector column
-            if k in v.columns:
-                v = v.drop(columns=[k])  # Remove sector column if it exists
-            v.loc[i, k] = row.dropna().mean()  # Use dropna() to handle any missing values
+        # Calculate sector average without dropping any columns
+        sector_means = v.apply(lambda row: row.mean(), axis=1)
+        v[k] = sector_means  # Add sector average as a new column
 
-    #creating the dataframe with sectors cum ret
-    df_sectors_returns = pd.DataFrame(index = final_dict['btc+eth'].index)
+    # Create the dataframe with sectors cum ret
+    df_sectors_returns = pd.DataFrame(index=final_dict['btc+eth'].index)
     for k,v in final_dict.items():
-        df_sectors_returns[k] = v[k]  # Get the sector column directly
+        df_sectors_returns[k] = v[k]  # Get the sector column we just created
     
     return df_sectors_returns
 
