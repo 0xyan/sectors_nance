@@ -30,27 +30,28 @@ def tg_init():
 def init_sectors():
     #sectors
     AI = ['TAOUSDT', 'RENDERUSDT', 'FETUSDT', 'WLDUSDT', 'AIUSDT', 'NEARUSDT', 'ARUSDT', 'IOUSDT', 'AKTUSDT', 'VANAUSDT']
-    new_AI = ['VIRTUALUSDT', 'GRIFFAINUSDT', 'AI16ZUSDT', 'ZEREBROUSDT', 'AIXBTUSDT', 'FARTCOINUSDT', 'GOATUSDT', 'ACTUSDT']
+    new_AI = ['ARCUSDT', 'VVVUSDT', 'VIRTUALUSDT', 'GRIFFAINUSDT', 'AI16ZUSDT', 'ZEREBROUSDT', 'AIXBTUSDT', 'FARTCOINUSDT', 'GOATUSDT', 'ACTUSDT']
     nft = ['MEUSDT', 'BLURUSDT', 'PENGUUSDT', 'APEUSDT']
-    new_prim_listings = ['BIOUSDT', 'USUALUSDT', 'PENGUUSDT', 'VANAUSDT', 'MEUSDT', 'MOVEUSDT',  'SCRUSDT', 'EIGENUSDT', 'ZROUSDT', 'ZKUSDT']
+    new_prim_listings = ['KAITOUSDT', 'BERAUSDT', 'BIOUSDT', 'USUALUSDT', 'PENGUUSDT', 'VANAUSDT', 'MEUSDT', 'MOVEUSDT',  'SCRUSDT', 'EIGENUSDT', 'ZROUSDT', 'ZKUSDT']
     new_sec_listings = ['1000CATUSDT', 'VELODROMEUSDT', 'ACXUSDT', 'ORCAUSDT', 'PNUTUSDT', 'ACTUSDT', 'COWUSDT', 'CETUSUSDT', 'THEUSDT']
     rwa = ['ONDOUSDT', 'USUALUSDT', 'ENAUSDT', 'RSRUSDT']
     modular_restaking = ['TIAUSDT', 'MANTAUSDT', 'ALTUSDT', 'DYMUSDT', 'ETHFIUSDT', 'OMNIUSDT', 'REZUSDT', 'EIGENUSDT']
     ethereum_ecosystem = ['ETHUSDT', 'ENSUSDT', 'LDOUSDT', 'SAFEUSDT', 'UNIUSDT', 'AAVEUSDT', 'OPUSDT', 'ARBUSDT']
     ton_ecosystem = ['TONUSDT', 'NOTUSDT', 'DOGSUSDT', 'CATIUSDT', 'HMSTRUSDT']
-    solana_ecosystem = ['SOLUSDT', 'JUPUSDT', 'PYTHUSDT', 'JTOUSDT', 'TNSRUSDT', 'WUSDT', 'ORCAUSDT', 'DRIFTUSDT', 'KMNOUSDT']
-    base_ecosystem = ['AEROUSDT', 'DEGENUSDT', 'VIRTUALUSDT', 'BRETTUSDT']
+    solana_ecosystem = ['RAYSOLUSDT','SOLUSDT', 'JUPUSDT', 'PYTHUSDT', 'JTOUSDT', 'TNSRUSDT', 'WUSDT', 'ORCAUSDT', 'DRIFTUSDT', 'KMNOUSDT']
+    base_ecosystem = ['VVVUSDT','AEROUSDT', 'DEGENUSDT', 'VIRTUALUSDT', 'BRETTUSDT']
     new_L1_non_evm = ['SUIUSDT', 'SEIUSDT', 'APTUSDT', 'MOVEUSDT']
     bluechip_L2s = ['ARBUSDT', 'POLUSDT', 'OPUSDT', 'STRKUSDT', 'ZKUSDT']
     btc_eth = ['BTCUSDT', 'ETHUSDT']
     gamefi = ['BEAMXUSDT', 'RONINUSDT', 'IMXUSDT', 'FLOWUSDT', 'AXSUSDT', 'SANDUSDT', 'GALAUSDT']
     bluechip_meme = ['1000SHIBUSDT', 'DOGEUSDT', '1000FLOKIUSDT', '1000PEPEUSDT', '1000BONKUSDT', 'WIFUSDT']
-    meme_spot = [ 'BOMEUSDT', 'PNUTUSDT', '1000CATUSDT', 'NEIROUSDT', 'TURBOUSDT', '1MBABYDOGEUSDT']
+    meme_spot = ['TSTUSDT', '1000CHEEMSUSDT', 'BOMEUSDT', 'PNUTUSDT', '1000CATUSDT', 'NEIROUSDT', 'TURBOUSDT', '1MBABYDOGEUSDT']
     meme_futs_only = ['1000000MOGUSDT', 'PONKEUSDT', 'MOODENGUSDT', 'CHILLGUYUSDT', 'POPCATUSDT', 'SPXUSDT', 'SLERFUSDT', 'DEGENUSDT', 
                       'MEWUSDT', "BRETTUSDT", "NEIROETHUSDT"]
     DeFi = ['UNIUSDT', 'AAVEUSDT', 'MKRUSDT', 'SNXUSDT', 'CRVUSDT', 'LDOUSDT', '1INCHUSDT', 'COMPUSDT', 'BALUSDT', 'ZRXUSDT', 'FXSUSDT']
     alt_L1_2020 = ['NEARUSDT', 'ICPUSDT', 'ATOMUSDT', 'DOTUSDT', 'AVAXUSDT', 'ALGOUSDT', 'HBARUSDT']
     dino = ['ADAUSDT', 'LTCUSDT', 'XRPUSDT', 'DASHUSDT', 'XLMUSDT', 'BCHUSDT', 'ETCUSDT' ]
+    trump_eco = ['AAVEUSDT', 'TRUMPUSDT', 'MELANIAUSDT']
     #bitcoin_ecosystem = ['BTCUSDT', 'ORDIUSDT', '1000SATSUSDT', 'STXUSDT']
 
 
@@ -59,13 +60,13 @@ def init_sectors():
     sector_list = [AI, new_AI, nft, new_prim_listings, new_sec_listings, rwa, modular_restaking, 
                    ethereum_ecosystem, ton_ecosystem, solana_ecosystem, 
                    base_ecosystem, new_L1_non_evm, bluechip_L2s, btc_eth, gamefi, 
-                   bluechip_meme, meme_spot, meme_futs_only, DeFi, alt_L1_2020, dino]
+                   bluechip_meme, meme_spot, meme_futs_only, DeFi, alt_L1_2020, dino, trump_eco]
     
     names_list = ['AI', 'new_AI', 'NFT', 'new_primary_listings', 'new_secondary_listings', 
                   'RWA', 'modular/restaking', 'ethereum_eco', 'ton_eco', 
                   'solana_eco', 'base_eco', 'new_L1_non_evm', 'bluechip_L2s', 
                   'btc+eth', 'gamefi', 'bluechip_meme', 'meme_spot', 'meme_perp_only', 
-                  'DeFi', 'alt_L1_2020', 'dino']
+                  'DeFi', 'alt_L1_2020', 'dino', 'trump_eco']
 
     #Creating a {name:list} of assets dict
     sectors = {name: sector for name, sector in zip(names_list, sector_list)}
@@ -111,28 +112,40 @@ async def create_sector_dfs(client, sectors, interval, startTime=None, limit=Non
 
     async def fetch_asset_df(asset):
         try:
-            return await get_klines(client, asset, interval, startTime, limit)
+            return (asset, await get_klines(client, asset, interval, startTime, limit))
         except Exception as e:
             print(f'Error processing {asset}: {e}')
-            return None
+            return (asset, None)
 
-
-    # iterate over each sector
+    # Create a flat list of all assets with their sector names
+    all_assets = []
+    asset_to_sector = {}
     for sector_name, assets in sectors.items():
-        # fetch all assets dataframes concurrently within a sector
-        tasks = [fetch_asset_df(asset) for asset in assets]
-        asset_dfs = await asyncio.gather(*tasks)
+        for asset in assets:
+            all_assets.append(asset)
+            if asset not in asset_to_sector:
+                asset_to_sector[asset] = []
+            asset_to_sector[asset].append(sector_name)
+    
+    # Fetch all assets' data concurrently
+    tasks = [fetch_asset_df(asset) for asset in all_assets]
+    results = await asyncio.gather(*tasks)
+    
+    # Process results
+    asset_dfs = {asset: df for asset, df in results if df is not None}
+    
+    # Group dataframes by sector
+    for sector_name, assets in sectors.items():
+        valid_sector_dfs = [asset_dfs[asset] for asset in assets if asset in asset_dfs]
         
-        # Filter out None values
-        valid_dfs = [df for df in asset_dfs if df is not None]
-        
-        if valid_dfs:
-            # Use inner merge first to get common timestamps
-            sector_df = valid_dfs[0]
-            for df in valid_dfs[1:]:
-                sector_df = pd.merge(sector_df, df, left_index=True, right_index=True, how='inner')
-            
-            sector_dict_final[sector_name] = sector_df
+        if valid_sector_dfs:
+            # Combine all dataframes for this sector
+            if len(valid_sector_dfs) == 1:
+                sector_dict_final[sector_name] = valid_sector_dfs[0]
+            else:
+                # Use pd.concat with join='inner' instead of sequential merges
+                sector_df = pd.concat(valid_sector_dfs, axis=1, join='inner')
+                sector_dict_final[sector_name] = sector_df
 
     return sector_dict_final
 
@@ -223,7 +236,7 @@ def day():
 def nine_days():
     asyncio.run(main(timeframe='1h', periods=216))
 
-
+'''
 def setup_schedule():
     schedule.every().wednesday.at("04:00").do(week)
     schedule.every().day.at("03:00").do(three_days)
@@ -233,6 +246,6 @@ def setup_schedule():
         schedule.run_pending()
         time.sleep(1)
 
-
+'''
 if __name__ == "__main__":
-    setup_schedule()
+    day()

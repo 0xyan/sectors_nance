@@ -50,12 +50,12 @@ def charts(sector_name, sectors_df, timeframe, periods):
             plt.plot(sectors_df.index, sectors_df[sector], label = f'{sector} {round(sectors_df[sector][-1]*100, 2)}%')
             plt.annotate(sector, xy=(0.95, sectors_df[sector][-1]), xytext=(8, 0), 
                     xycoords=('axes fraction', 'data'), textcoords='offset points', size = 10, weight = 'bold')
-            plt.legend(loc = 'best')
+            plt.legend(loc = 'upper left')
         else:
             plt.plot(sectors_df.index, sectors_df[sector], label = f'{sector} {round(sectors_df[sector][-1]*100, 2)}%', linestyle = 'dashed')
             plt.annotate(sector, xy=(0.95, sectors_df[sector][-1]), xytext=(8, 0), 
                     xycoords=('axes fraction', 'data'), textcoords='offset points', size = 10, weight = 'bold')
-            plt.legend(loc = 'best')
+            plt.legend(loc = 'upper left')
     plt.xlabel('Datetime UTC', fontsize = 13)
     plt.ylabel('Return', fontsize = 13)
     plt.grid(axis='y')
