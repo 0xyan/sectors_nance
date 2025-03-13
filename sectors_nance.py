@@ -248,4 +248,4 @@ def setup_schedule():
 
 '''
 if __name__ == "__main__":
-    day()
+    three_days()
